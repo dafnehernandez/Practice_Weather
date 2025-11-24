@@ -1,0 +1,114 @@
+/* Reset básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    /* FONDO GRADIENTE AZUL → MORADO */
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Contenedor principal */
+.weather-container {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 420px;
+    padding: 32px 36px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+/* Título */
+.weather-container h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-bottom: 24px;
+}
+
+/* Grupos de entrada */
+.input-group {
+    text-align: left;
+    margin-bottom: 16px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #444;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 4px;
+    border: 1px solid #d0d0d0;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0,123,255,0.2);
+}
+
+/* Botón */
+.btn-primary {
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px 0;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.05s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+/* Resultados */
+.result-box {
+    margin-top: 20px;
+    padding: 14px 16px;
+    background-color: #f1f3f5;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+/* Utilidad para ocultar */
+.hidden {
+    display: none;
+}
+
+/* Ajuste en móviles */
+@media (max-width: 480px) {
+    .weather-container {
+        margin: 16px;
+        padding: 24px 20px;
+    }
+
+    .weather-container h1 {
+        font-size: 1.7rem;
+    }
+}
