@@ -25,6 +25,22 @@ async function handleFetchClick(){
     const longitude = document.getElementById("longitude-input").value;
     const currentTemperature = document.getElementById("temp-display");
     const currentWindspeed = document.getElementById("wind-display");
+    const resultBox = document.getElementById("weather-result");
+
+    try {
+        const currentWeather = await fetchWeatherData(latitude, longitude);
+
+        // Mostrar valores
+        currentTemperature.textContent = currentWeather.temperature;
+        currentWindspeed.textContent = currentWeather.windspeed;
+
+        // 👇 Esto hace visible el recuadro
+        resultBox.classList.remove("hidden");
+    } catch (error) {
+        console.error("Error obteniendo el clima:", error);
+        alert("Hubo un problema al obtener el clima. Revisa la consola.");
+    }
+
 
     const currentWeather = await fetchWeatherData(latitude, longitude);
     currentTemperature.textContent = currentWeather.temperature;
