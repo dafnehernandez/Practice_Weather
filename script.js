@@ -30,11 +30,11 @@ async function handleFetchClick(){
     try {
         const currentWeather = await fetchWeatherData(latitude, longitude);
 
-        // Mostrar valores
+        //Show values
         currentTemperature.textContent = currentWeather.temperature;
         currentWindspeed.textContent = currentWeather.windspeed;
 
-        // 👇 Esto hace visible el recuadro
+        // Make visible result
         resultBox.classList.remove("hidden");
     } catch (error) {
         console.error("Error obteniendo el clima:", error);
