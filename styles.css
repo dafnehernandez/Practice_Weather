@@ -8,23 +8,32 @@
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-    /* FONDO GRADIENTE AZUL → MORADO */
-    background: linear-gradient(135deg, #4e54c8, #8f94fb);
-    
+    /*Fondo gradiente*/
+    background: linear-gradient(135deg, #4e54c8, #8f94fb, #6a11cb, #2575fc);
+    background-size: 400% 400%;
+    animation: gradientAnimation 12s ease infinite;
+
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Contenedor principal */
+/*Animación del fondo (el gradiente */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Tarjeta principal */
 .weather-container {
     background-color: #ffffff;
     width: 100%;
     max-width: 420px;
     padding: 32px 36px;
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.20);
     text-align: center;
 }
 
@@ -86,7 +95,7 @@ body {
     transform: scale(0.98);
 }
 
-/* Resultados */
+/* Caja de resultados */
 .result-box {
     margin-top: 20px;
     padding: 14px 16px;
@@ -96,12 +105,12 @@ body {
     color: #333;
 }
 
-/* Utilidad para ocultar */
+/* Ocultar */
 .hidden {
     display: none;
 }
 
-/* Ajuste en móviles */
+/* Responsive */
 @media (max-width: 480px) {
     .weather-container {
         margin: 16px;
