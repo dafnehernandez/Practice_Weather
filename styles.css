@@ -9,7 +9,8 @@ body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
     /*Fondo gradiente*/
-    background: linear-gradient(135deg, #4e54c8, #8f94fb, #6a11cb, #2575fc);
+    /*background: linear-gradient(135deg, #4e54c8, #8f94fb, #6a11cb, #2575fc);*/
+    background: linear-gradient(135deg, #753042, #a65256, #df6e68, #908e9b, #e95805, #fe9226, #f9930a);
     background-size: 400% 400%;
     animation: gradientAnimation 12s ease infinite;
 
@@ -28,7 +29,9 @@ body {
 
 /* Tarjeta principal */
 .weather-container {
-    background-color: #ffffff;
+    //background-color: #ffffff;
+    background: rgba(255,255,255, 0.5);
+    color: white;
     width: 100%;
     max-width: 420px;
     padding: 32px 36px;
@@ -79,7 +82,7 @@ body {
     padding: 10px 0;
     border: none;
     border-radius: 4px;
-    background-color: #007bff;
+    background-color: #C46400;
     color: #ffffff;
     font-size: 1rem;
     font-weight: 600;
@@ -88,7 +91,7 @@ body {
 }
 
 .btn-primary:hover {
-    background-color: #0069d9;
+    background-color: #f39126;
 }
 
 .btn-primary:active {
@@ -99,7 +102,8 @@ body {
 .result-box {
     margin-top: 20px;
     padding: 14px 16px;
-    background-color: #f1f3f5;
+    //background-color: #D2B0F5;
+    background: rgba(213, 191, 242, 0.5);
     border-radius: 6px;
     font-size: 0.95rem;
     color: #333;

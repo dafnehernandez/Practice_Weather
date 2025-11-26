@@ -41,7 +41,6 @@ async function handleFetchClick(){
         alert("Hubo un problema al obtener el clima. Revisa la consola.");
     }
 
-
     const currentWeather = await fetchWeatherData(latitude, longitude);
     currentTemperature.textContent = currentWeather.temperature;
     currentWindspeed.textContent = currentWeather.windspeed;
