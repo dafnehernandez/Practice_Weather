@@ -1,18 +1,30 @@
-console.log("Hola api clima");
-
-//API WEATHER
-async function fetchWeatherData(latitude, longitude){
+console.log("Hola api clima"); 
+//API WEATHER 
+async function fetchWeatherData(latitude, longitude){ 
+   // url https
+   //const url = https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true; 
+    
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
-    const response = await fetch(url);
-    const data = await response.json();
 
-    console.log("Data:", data);
-    return data.current_weather;
+    //fetch peticion de http 
+    const response  = await fetch(url); //cuando sean promesas se debe colocar un await para que espere en que momento se continua 
+    console.log(response)
+    const data = await response.json(); 
+    console.log(data); 
+    console.log(data.elevation); 
+    console.log(data.current_weather); //el name proviene de la API 
+    console.log(data.current_weather.temperature); 
+    console.log(data.current_weather.windspeed);
+    console.log(response); 
+    
+    return data.current_weather; 
 }
 
-//=========================
-// DOM ELEMENTS
-//=========================
+//si se utiliza await se debe hacer que tu funcion sea asincrona
+
+//se prueba la funcion
+//fetchWeatherData( 25.666815, -100.28233);
+
 const locationInput = document.getElementById("location-input");
 const suggestionsList = document.getElementById("suggestions");
 const latitude = document.getElementById("latitude-input");
@@ -25,22 +37,38 @@ const resultBox = document.getElementById("weather-result");
 //  WEATHER BUTTON
 //=========================
 async function handleFetchClick(){
-    console.log("Get Weather clicked");
+    console.log("Boton fetch clickeado");
 
+    //take actual values for inputs
     const latitudeCurrent  = parseFloat(latitude.value);
     const longitudeCurrent = parseFloat(longitude.value);
 
-    const currentWeather = await fetchWeatherData(latitudeCurrent, longitudeCurrent);
+    try {
+        const currentWeather = await fetchWeatherData(latitudeCurrent, longitudeCurrent);
 
-    currentTemperature.textContent = currentWeather.temperature;
-    currentWindspeed.textContent   = currentWeather.windspeed;
-    resultBox.classList.remove("hidden");
+         //Show values
+        currentTemperature.textContent = currentWeather.temperature;
+        currentWindspeed.textContent = currentWeather.windspeed;
+
+        // Make visible result
+        resultBox.classList.remove("hidden");
+    } catch (error) {
+        console.error("Cant' obtain weather:", error);
+        alert("There was a problem getting the weather. Check the console.");
+    }
+
+    //Textcontent es el output que se ve en la pantalla
 }
+
 
 //=========================
 // AUTOCOMPLETE SEARCH
 //=========================
+
+//Listen to what's in the search input
 locationInput.addEventListener("input", handleInputChange);
+
+//let searchTimeout = null;
 
 function handleInputChange(event){
     const query = event.target.value.trim();
@@ -50,14 +78,26 @@ function handleInputChange(event){
         return;
     }
 
-    searchLocations(query); // <<❗ SE TE FALTABA ESTO
+    searchLocations(query); 
 }
 
-async function searchLocations(query){
+//Search Locations group
+async function searchLocations(query) {
     const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&addressdetails=1&limit=5`;
-    const response = await fetch(url,{ headers:{ "Accept-Language":"es"}});
-    const results = await response.json();
-    renderSuggestions(results);
+
+    try {
+        const response = await fetch(url, {
+            headers: {
+                "Accept-Language": "es" // Para que devuelva nombres en español cuando sea posible
+            }
+        });
+
+        const results = await response.json();
+        renderSuggestions(results);
+    } catch (error) {
+        console.error("Error buscando ubicaciones:", error);
+        suggestionsList.innerHTML = "<li>Error al buscar ubicaciones</li>";
+    }
 }
 
 function renderSuggestions(results){
@@ -89,17 +129,20 @@ suggestionsList.addEventListener("click",(event)=>{
     const lon  = parseFloat(li.dataset.lon);
     const name = li.textContent;
 
+    //Put name on input
     locationInput.value  = name;
     latitude.value  = lat;
     longitude.value = lon;
 
+    //Clean suggestions
     suggestionsList.innerHTML = "";
 
-    console.log(`Ubicación seleccionada → ${name}  LAT:${lat}  LON:${lon}`);
+    console.log(`Location selected: ${name}  Latitude:${lat}  Longitude:${lon}`);
 
+     // Call principal logic
     onLocationSelected(lat,lon);
 });
 
 function onLocationSelected(lat,lon){
-    console.log("Coordenadas aplicadas para botón:", lat, lon);
+    console.log("Coordinates applied for button", lat, lon);
 }
